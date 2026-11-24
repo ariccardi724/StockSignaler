@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Buy Signal Alert Engine — Generic</title>
+<meta name="description" content="Generic buy-signal alerts: MA-band + RSI, VIX 3-down-day, dip buys, RSI(2), Bollinger %B bounce, and 15-min opening range breakout — indexes, Mag 7, and top sector ETFs.">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0e1117">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Buy Signals">
+<link rel="apple-touch-icon" href="icon.svg">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header>
+  <h1><span>$</span> Buy Signal Alert Engine <span class="small">· Generic</span></h1>
+  <span class="badge" id="dataBadge">Loading…</span>
+  <span class="badge" id="clockBadge"></span>
+  <button class="secondary" id="notifyBtn" style="margin-left:auto">Enable notifications</button>
+  <button id="refreshBtn">Refresh — signals + current prices</button>
+  <span class="badge" id="priceStamp">Current prices not fetched yet</span>
+</header>
+<p id="notifyStatus" class="small muted" role="status" style="margin:6px 2px 0"></p>
+<nav class="tabs" role="tablist" aria-label="App sections">
+  <button class="tabbtn active" data-tab="signals" role="tab">Signals</button>
+  <button class="tabbtn" data-tab="buys" role="tab">Buys <span class="tabcount" id="buysCount"></span></button>
+  <button class="tabbtn" data-tab="calendar" role="tab">Calendar <span class="tabcount" id="calCount"></span></button>
+  <button class="tabbtn" data-tab="trades" role="tab">Trade Log</button>
+</nav>
+<main>
+  <div id="alertBanner"></div>
+  <p id="statusBar">Pulling live data from Yahoo Finance…</p>
+
+  <!-- ============ SIGNALS TAB ============ -->
+  <section id="tab-signals" class="tabpane active">
+    <h2>Today's signals</h2>
+    <div class="grid">
+      <div class="card sigcard" id="cardMA" style="--sig:#00c805">
+        <h3><span class="sigdot"></span>Signal #1 — MA-band + RSI · QQQ <button class="helpbtn" data-help="ma">?</button></h3>
+        <p class="brief">Buy QQQ when it touches a long moving average, sized by RSI.</p>
+        <div class="plabel">QQQ · Latest close</div>
+        <div class="big" id="qqqPrice">—</div>
+        <div class="small" id="qqqCurrent">Current price —</div>
+        <div class="gauge"><div class="gauge-fill" id="gaugeMA"></div></div>
+        <div class="gauge-cap" id="gaugeMACap">RSI-14 —</div>
+        <div style="margin-top:8px"><span id="pillMA" class="pill no">Checking…</span> <button class="secondary logbtn" id="logMA" style="display:none">Log trade</button></div>
+        <div class="matching" id="match1"></div>
+        <details class="details"><summary>Details</summary><div id="maBody"><p class="muted">Loading QQQ…</p></div></details>
+      </div>
+      <div class="card sigcard" id="cardVIX" style="--sig:#8b5cf6">
+        <h3><span class="sigdot"></span>Signal #2 — VIX 3-down-day · QQQ <button class="helpbtn" data-help="vix">?</button></h3>
+        <p class="brief">Buy QQQ after fear peaks and starts falling for 3 days.</p>
+        <div class="plabel">VIX · Current level (not a stock price)</div>
+        <div class="big" id="vixPrice">—</div>
+        <div class="gauge"><div class="gauge-fill" id="gaugeVIX"></div></div>
+        <div class="gauge-cap" id="gaugeVIXCap">Down streak —</div>
+        <div style="margin-top:8px"><span id="pillVIX" class="pill no">Checking…</span> <button class="secondary logbtn" id="logVIX" style="display:none">Log trade</button></div>
+        <div class="matching" id="match2"></div>
+        <details class="details"><summary>Details</summary><div id="vixBody"><p class="muted">Loading VIX…</p></div></details>
+      </div>
+      <div class="card sigcard" id="cardDip" style="--sig:#38bdf8">
+        <h3><span class="sigdot"></span>Signal #3 — Dip buy · ticker lookup <button class="helpbtn" data-help="dip">?</button></h3>
+        <p class="brief">Buy a ticker 5% below its lowest close in the prior 63 trading days.</p>
+        <div class="plabel">Checked ticker · Latest close</div>
+        <div class="big" id="dipPrice">—</div>
+        <div class="small" id="dipCurrent">Current price —</div>
+        <div class="gauge"><div class="gauge-fill" id="gaugeDip"></div></div>
+        <div class="gauge-cap" id="gaugeDipCap">% below 63-day low —</div>
+        <div style="margin-top:8px"><span id="pillDip" class="pill no">Run a ticker</span></div>
+        <div class="row">
+          <div><label for="tickerInput">Ticker</label><input id="tickerInput" value="NVDA" placeholder="e.g. NVDA, AAPL, XLK" autocomplete="off"></div>
+          <div><button id="checkTickerBtn">Run signals #3–#5</button></div>
+        </div>
+        <div class="matching" id="match3"></div>
+        <details class="details"><summary>Details</summary><div id="tickerBody" style="margin-top:10px"></div></details>
+      </div>
+      <div class="card sigcard" id="cardRSI2" style="--sig:#facc15">
+        <h3><span class="sigdot"></span>Signal #4 — RSI(2) mean reversion · QQQ <button class="helpbtn" data-help="rsi2">?</button></h3>
+        <p class="brief">Buy QQQ when 2-day RSI is extremely oversold.</p>
+        <div class="plabel">QQQ · RSI(2) — Latest close</div>
+        <div class="big" id="rsi2Price">—</div>
+        <div class="small" id="rsi2Current">Current price —</div>
+        <div class="gauge"><div class="gauge-fill" id="gaugeRSI2"></div></div>
+        <div class="gauge-cap" id="gaugeRSI2Cap">RSI(2) —</div>
+        <div style="margin-top:8px"><span id="pillRSI2" class="pill no">Checking…</span> <button class="secondary logbtn" id="logRSI2" style="display:none">Log trade</button></div>
+        <div class="matching" id="match4"></div>
+        <details class="details"><summary>Details</summary><div id="rsi2Body"><p class="muted">Loading QQQ…</p></div></details>
+      </div>
+      <div class="card sigcard" id="cardBB" style="--sig:#fb7185">
+        <h3><span class="sigdot"></span>Signal #5 — Bollinger %B bounce · QQQ <button class="helpbtn" data-help="bb">?</button></h3>
+        <p class="brief">Buy QQQ when it closes back inside its Bollinger Band.</p>
+        <div class="plabel">QQQ · Bollinger %B — Latest close</div>
+        <div class="big" id="bbPrice">—</div>
+        <div class="small" id="bbCurrent">Current price —</div>
+        <div class="gauge"><div class="gauge-fill" id="gaugeBB"></div></div>
+        <div class="gauge-cap" id="gaugeBBCap">%B —</div>
+        <div style="margin-top:8px"><span id="pillBB" class="pill no">Checking…</span> <button class="secondary logbtn" id="logBB" style="display:none">Log trade</button></div>
+        <div class="matching" id="match5"></div>
+        <details class="details"><summary>Details</summary><div id="bbBody"><p class="muted">Loading QQQ…</p></div></details>
+      </div>
+      <div class="card sigcard" id="cardORB" style="--sig:#2dd4bf">
+        <h3><span class="sigdot"></span>Signal #6 — Opening range breakout, 15-min <button class="helpbtn" data-help="orb">?</button></h3>
+        <p class="brief">Buy a breakout above the first 15 minutes of the day, hold to the close.</p>
+        <div class="plabel">Checked ticker · Last 15-min close</div>
+        <div class="big" id="orbPrice">—</div>
+        <div class="small" id="orbCurrent">Current price —</div>
+        <div class="gauge"><div class="gauge-fill" id="gaugeORB"></div></div>
+        <div class="gauge-cap" id="gaugeORBCap">Opening range —</div>
+        <div style="margin-top:8px"><span id="pillORB" class="pill no">Run a ticker</span></div>
+        <div class="row">
+          <div><label for="orbTicker">Ticker</label><input id="orbTicker" value="QQQ" autocomplete="off"></div>
+          <div><button id="checkOrbBtn">Run signal #6</button></div>
+        </div>
+        <div class="matching" id="match6"></div>
+        <details class="details"><summary>Details</summary><div id="orbBody" style="margin-top:10px"></div></details>
+      </div>
+    </div>
+    <section class="card" style="margin-top:14px">
+      <h2>End-of-day scan — generic universe (30 tickers), signals #3–#5</h2>
+      <p class="muted">Scans SPY, QQQ, DIA, IWM, Mag 7, and 19 sector/industry ETFs for dip buys (#3), RSI(2) (#4), and Bollinger %B bounces (#5). Runs automatically on open after 4:15pm ET, or on demand.</p>
+      <div class="row">
+        <div><button id="scanBtn">Run EOD scan now</button></div>
+        <div><button class="secondary" id="loadGhScanBtn">Load latest GitHub Actions scan</button></div>
+        <div><span class="small" id="scanStatus">Not run yet this session.</span></div>
+      </div>
+      <div id="scanSummary" class="scan-summary muted">No scan run yet this session.</div>
+      <button class="secondary" id="scanToggleBtn" style="display:none">Show hits</button>
+      <div id="scanResults" style="margin-top:12px;display:none"></div>
+      <h3 style="margin-top:16px">Scan history</h3>
+      <div id="scanHistory" class="small"></div>
+      <h3 style="margin-top:16px">Watchlist</h3>
+      <p class="small">Generic universe: 4 indexes, Mag 7, 19 sector/industry ETFs. Edit below — saved in this browser only.</p>
+      <div class="row">
+        <div><input id="addTickerInput" placeholder="Add ticker, e.g. NVDA"></div>
+        <div><button class="secondary" id="addTickerBtn">Add to watchlist</button></div>
+      </div>
+      <div id="watchlistList" class="small mono" style="margin-top:8px"></div>
+    </section>
+    <section class="card">
+      <h2>How the signals work <button class="helpbtn" data-help="how">?</button></h2>
+      <details class="details"><summary>Details — all six signals</summary>
+      <div id="helpBox" class="helpbox" style="display:none"></div>
+      <div class="kv"><span>#1 MA-band + RSI</span><span>QQQ touches 290- or 330-day MA (day low within 1%), hold 10 days; 420-day, hold 20 days. RSI 25–30 = full size, 35–45 = skip.</span></div>
+      <div class="kv"><span>#2 VIX 3-down-day</span><span>Arm VIX ≥30, buy close of 3rd straight VIX down day while VIX ≥25, hold 20 days. Capitulation: VIX ≥40 peak in prior 10 days, then 2nd down day.</span></div>
+      <div class="kv"><span>#3 Dip buy</span><span>Close ≤ 5% below lowest close in prior 63 trading days, hold 5 days. Backtest (253 held tickers, past year): 65.8% win, n=260, +4.6% mean.</span></div>
+      <div class="kv"><span>#4 RSI(2)</span><span>2-day RSI under 10 at the close, exit when RSI(2) crosses over 50 or after 5 trading days. Literature: ~70–80% win on index ETFs; not yet backtested on this universe.</span></div>
+      <div class="kv"><span>#5 Bollinger %B</span><span>Close below the lower Bollinger Band (20-day, 2σ), then close back inside the band. Hold 5 days. Literature: low-60s% win at 5 days; not yet backtested on this universe.</span></div>
+      <div class="kv"><span>#6 ORB 15-min</span><span>15-min close above the 9:30–9:45am ET opening-range high, hold to the close. Literature: ~45–55% win, winners bigger than losers; intraday only.</span></div>
+      <div class="kv"><span>Exits</span><span>Clock exits only — no stop-loss. Stops made every backtest worse (signals #1–#3).</span></div>
+      <div class="kv"><span>Data</span><span>Yahoo Finance v8 chart, adjusted closes. Direct fetch first, then allorigins, then corsproxy. If all fail, the app says so — it never invents prices.</span></div>
+      </details>
+    </section>
+  </section>
+
+  <!-- ============ BUYS TAB ============ -->
+  <section id="tab-buys" class="tabpane">
+    <h2>Recommended buys — today only</h2>
+    <p class="muted">Built live from today's signals (#1–#5) and the latest EOD scan. Each one is a quick-enter order: price, shares and $ are editable and cross-computed. Log it and it moves to the Trade Log and the Calendar. Don't log it and it disappears at midnight ET.</p>
+    <div id="buysList"></div>
+  </section>
+
+  <!-- ============ CALENDAR TAB ============ -->
+  <section id="tab-calendar" class="tabpane">
+    <h2>Calendar — sells and possible buys</h2>
+    <p class="muted">Sell events are placed automatically from logged buys, on that signal's clock exit. Possible buys are today's recommendations — editable, and they disappear at midnight ET if you don't log them. Click a day to expand it.</p>
+    <div class="row" style="margin-bottom:10px">
+      <div><button class="secondary" id="calPrevBtn">‹ Prev month</button></div>
+      <div><button class="secondary" id="calNextBtn">Next month ›</button></div>
+      <div><button class="secondary" id="calWeekBtn">Week view</button></div>
+      <div><button class="secondary" id="calMonthBtn">Month view</button></div>
+      <div><span class="small" id="calTitle"></span></div>
+    </div>
+    <div id="calGrid"></div>
+    <div id="calDetail" style="margin-top:12px"></div>
+  </section>
+
+  <!-- ============ TRADE LOG TAB ============ -->
+  <section id="tab-trades" class="tabpane">
+    <div class="card">
+      <h2>Trade log — log an entry, get your sell target</h2>
+      <p class="muted">Sell target is a clock exit: signal #1 = 10 trading days, signal #2 = 20, signals #3 / #4 / #5 = 5, signal #6 = to the close the same day. Weekends and US market holidays (2026–2027) are skipped. The app shows the live price for open trades and the reference close once the sell date arrives — it never predicts a future exit price.</p>
+      <div class="row">
+        <div><label for="logTicker">Ticker</label><input id="logTicker" placeholder="QQQ"></div>
+        <div><label for="logSignal">Signal</label><select id="logSignal"><option value="1">1 — MA-band + RSI (10d)</option><option value="2">2 — VIX 3-down-day (20d)</option><option value="3" selected>3 — Dip buy (5d)</option><option value="4">4 — RSI(2) (5d / RSI&gt;50)</option><option value="5">5 — Bollinger %B (5d)</option><option value="6">6 — ORB 15-min (to close)</option></select></div>
+        <div><label for="logDate">Entry date</label><input id="logDate" type="date"></div>
+        <div><label for="logPrice">Entry price $</label><input id="logPrice" type="number" step="0.01" min="0" placeholder="0.00"></div>
+        <div><label for="logShares">Shares</label><input id="logShares" type="number" step="0.01" min="0" placeholder="0"></div>
+        <div><label for="logAmount">…or dollar amount $</label><input id="logAmount" type="number" step="0.01" min="0" placeholder="0.00"></div>
+        <div><button id="logTradeBtn">Log trade</button></div>
+      </div>
+      <div id="tradeList" style="margin-top:14px"></div>
+      <div class="row" style="margin-top:12px">
+        <div><button class="secondary" id="exportTradesBtn">Export trades (JSON)</button></div>
+        <div><button class="secondary" id="importTradesBtn">Import trades (JSON)</button></div>
+        <input type="file" id="importFile" accept=".json" style="display:none">
+      </div>
+    </div>
+  </section>
+</main>
+<footer>
+  Backtests only — past win rates are not a future guarantee, and this app places no trades. Signals are computed from fetched closes in your browser. Trade log, watchlist edits, and scan history live in this browser's localStorage only. Generic version: indexes, Mag 7, and sector ETFs only — no personal holdings.
+</footer>
+<script src="app.js"></script>
+</body>
+</html>

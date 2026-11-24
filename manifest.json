@@ -1,0 +1,19 @@
+{
+  "background_color": "#0e1117",
+  "description": "Generic buy-signal alerts: MA-band + RSI, VIX 3-down-day, dip buys, RSI(2), Bollinger %B bounce, and 15-min opening range breakout \u2014 indexes, Mag 7, and top sector ETFs.",
+  "display": "standalone",
+  "icons": [
+    {
+      "purpose": "any",
+      "sizes": "any",
+      "src": "icon.svg",
+      "type": "image/svg+xml"
+    }
+  ],
+  "name": "Buy Signal Alert Engine \u2014 Generic",
+  "orientation": "portrait",
+  "scope": "./",
+  "short_name": "Buy Signals",
+  "start_url": "./index.html",
+  "theme_color": "#0e1117"
+}

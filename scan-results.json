@@ -1,0 +1,237 @@
+{
+  "date": "2026-11-24",
+  "time": "2026-11-24T14:28:53.304438+00:00",
+  "scanned": 30,
+  "hits": [
+    {
+      "signal": 5,
+      "ticker": "SPY",
+      "date": "2026-11-24",
+      "close": 722.29,
+      "prevPctB": -0.22,
+      "pctB": 0.21,
+      "exitDate": "2026-12-02",
+      "leveraged_or_inverse": false
+    },
+    {
+      "signal": 5,
+      "ticker": "QQQ",
+      "date": "2026-11-24",
+      "close": 651.03,
+      "prevPctB": -0.12,
+      "pctB": 0.28,
+      "exitDate": "2026-12-02",
+      "leveraged_or_inverse": false
+    },
+    {
+      "signal": 5,
+      "ticker": "DIA",
+      "date": "2026-11-24",
+      "close": 495.8,
+      "prevPctB": -0.21,
+      "pctB": 0.14,
+      "exitDate": "2026-12-02",
+      "leveraged_or_inverse": false
+    },
+    {
+      "signal": 5,
+      "ticker": "IWM",
+      "date": "2026-11-24",
+      "close": 265.74,
+      "prevPctB": -0.2,
+      "pctB": 0.16,
+      "exitDate": "2026-12-02",
+      "leveraged_or_inverse": false
+    },
+    {
+      "signal": 5,
+      "ticker": "MSFT",
+      "date": "2026-11-24",
+      "close": 492.5,
+      "prevPctB": -0.1,
+      "pctB": 0.09,
+      "exitDate": "2026-12-02",
+      "leveraged_or_inverse": false
+    },
+    {
+      "signal": 5,
+      "ticker": "NVDA",
+      "date": "2026-11-24",
+      "close": 165.05,
+      "prevPctB": -0.03,
+      "pctB": 0.36,
+      "exitDate": "2026-12-02",
+      "leveraged_or_inverse": false
+    },
+    {
+      "signal": 5,
+      "ticker": "META",
+      "date": "2026-11-24",
+      "close": 597.6,
+      "prevPctB": -0.31,
+      "pctB": 0.23,
+      "exitDate": "2026-12-02",
+      "leveraged_or_inverse": false
+    },
+    {
+      "signal": 5,
+      "ticker": "TSLA",
+      "date": "2026-11-24",
+      "close": 385.46,
+      "prevPctB": -0.04,
+      "pctB": 0.51,
+      "exitDate": "2026-12-02",
+      "leveraged_or_inverse": false
+    },
+    {
+      "signal": 5,
+      "ticker": "XLK",
+      "date": "2026-11-24",
+      "close": 162.38,
+      "prevPctB": -0.05,
+      "pctB": 0.29,
+      "exitDate": "2026-12-02",
+      "leveraged_or_inverse": false
+    },
+    {
+      "signal": 5,
+      "ticker": "XLF",
+      "date": "2026-11-24",
+      "close": 55.65,
+      "prevPctB": -0.06,
+      "pctB": 0.18,
+      "exitDate": "2026-12-02",
+      "leveraged_or_inverse": false
+    },
+    {
+      "signal": 4,
+      "ticker": "XLE",
+      "date": "2026-11-24",
+      "close": 59.87,
+      "rsi2": 1.8,
+      "exitDate": "2026-12-02",
+      "leveraged_or_inverse": false
+    },
+    {
+      "signal": 5,
+      "ticker": "XLI",
+      "date": "2026-11-24",
+      "close": 162.47,
+      "prevPctB": -0.21,
+      "pctB": 0.23,
+      "exitDate": "2026-12-02",
+      "leveraged_or_inverse": false
+    },
+    {
+      "signal": 5,
+      "ticker": "XLY",
+      "date": "2026-11-24",
+      "close": 116.93,
+      "prevPctB": -0.02,
+      "pctB": 0.4,
+      "exitDate": "2026-12-02",
+      "leveraged_or_inverse": false
+    },
+    {
+      "signal": 5,
+      "ticker": "XLB",
+      "date": "2026-11-24",
+      "close": 49.9,
+      "prevPctB": -0.18,
+      "pctB": 0.15,
+      "exitDate": "2026-12-02",
+      "leveraged_or_inverse": false
+    },
+    {
+      "signal": 5,
+      "ticker": "SMH",
+      "date": "2026-11-24",
+      "close": 460.18,
+      "prevPctB": -0.06,
+      "pctB": 0.32,
+      "exitDate": "2026-12-02",
+      "leveraged_or_inverse": false
+    },
+    {
+      "signal": 5,
+      "ticker": "SOXX",
+      "date": "2026-11-24",
+      "close": 140.22,
+      "prevPctB": -0.01,
+      "pctB": 0.33,
+      "exitDate": "2026-12-02",
+      "leveraged_or_inverse": false
+    },
+    {
+      "signal": 5,
+      "ticker": "KRE",
+      "date": "2026-11-24",
+      "close": 69.54,
+      "prevPctB": -0.19,
+      "pctB": 0.09,
+      "exitDate": "2026-12-02",
+      "leveraged_or_inverse": false
+    },
+    {
+      "signal": 5,
+      "ticker": "XBI",
+      "date": "2026-11-24",
+      "close": 147.16,
+      "prevPctB": -0.05,
+      "pctB": 0.29,
+      "exitDate": "2026-12-02",
+      "leveraged_or_inverse": false
+    },
+    {
+      "signal": 5,
+      "ticker": "IBB",
+      "date": "2026-11-24",
+      "close": 208.7,
+      "prevPctB": -0.08,
+      "pctB": 0.33,
+      "exitDate": "2026-12-02",
+      "leveraged_or_inverse": false
+    },
+    {
+      "signal": 5,
+      "ticker": "ARKK",
+      "date": "2026-11-24",
+      "close": 69.36,
+      "prevPctB": -0.06,
+      "pctB": 0.2,
+      "exitDate": "2026-12-02",
+      "leveraged_or_inverse": false
+    },
+    {
+      "signal": 5,
+      "ticker": "QQQM",
+      "date": "2026-11-24",
+      "close": 267.97,
+      "prevPctB": -0.12,
+      "pctB": 0.27,
+      "exitDate": "2026-12-02",
+      "leveraged_or_inverse": false
+    },
+    {
+      "signal": 5,
+      "ticker": "VOO",
+      "date": "2026-11-24",
+      "close": 663.91,
+      "prevPctB": -0.21,
+      "pctB": 0.21,
+      "exitDate": "2026-12-02",
+      "leveraged_or_inverse": false
+    },
+    {
+      "signal": 5,
+      "ticker": "SCHD",
+      "date": "2026-11-24",
+      "close": 34.39,
+      "prevPctB": -0.13,
+      "pctB": 0.11,
+      "exitDate": "2026-12-02",
+      "leveraged_or_inverse": false
+    }
+  ],
+  "errors": []
+}

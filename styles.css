@@ -1,0 +1,100 @@
+:root{
+  --bg:#0e1117; --bg2:#171b22; --card:#1c212b; --card2:#232936;
+  --text:#f5f8fa; --muted:#9aa3af; --green:#00c805; --green-dim:#0a3d1e;
+  --red:#ff5000; --red-dim:#3d130a; --amber:#ffb020; --border:#2a313d;
+  --accent:#00c805; --radius:14px;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:#7dd3a8}
+header{position:sticky;top:0;z-index:10;background:rgba(14,17,23,.95);border-bottom:1px solid var(--border);padding:12px 16px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+header h1{font-size:20px;margin:0}
+header h1 span{color:var(--green)}
+.badge{font-size:12px;padding:4px 8px;border-radius:999px;background:var(--card2);color:var(--muted);border:1px solid var(--border)}
+.badge.live{color:var(--green);border-color:var(--green)}
+.badge.err{color:var(--red);border-color:var(--red)}
+main{max-width:1080px;margin:0 auto;padding:16px}
+section{margin-bottom:20px}
+h2{font-size:16px;margin:0 0 10px}
+h3{font-size:14px;margin:0 0 8px}
+.muted{color:var(--muted);font-size:13px}
+.small{font-size:12px;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px}
+.card.hit{border-color:var(--green);box-shadow:0 0 0 1px var(--green)}
+.card.close-call{border-color:var(--amber)}
+.big{font-size:34px;font-weight:700;line-height:1.1}
+.up{color:var(--green)} .down{color:var(--red)} .amber{color:var(--amber)}
+.pill{display:inline-block;padding:3px 10px;border-radius:999px;font-weight:700;font-size:12px}
+.pill.hit{background:var(--green);color:#04140a}
+.pill.close{background:var(--amber);color:#241a00}
+.pill.no{background:#2a313d;color:var(--muted)}
+.pill.armed{background:#7c3aed;color:#fff}
+button{background:var(--green);color:#04140a;border:0;border-radius:999px;padding:10px 18px;font-weight:700;cursor:pointer;font-size:14px}
+button.secondary{background:var(--card2);color:var(--text);border:1px solid var(--border)}
+button:disabled{opacity:.5;cursor:default}
+input,select{width:100%;background:var(--bg2);border:1px solid var(--border);color:var(--text);border-radius:10px;padding:10px 12px;font-size:15px}
+label{font-size:12px;color:var(--muted);display:block;margin:10px 0 4px}
+.row{display:flex;gap:10px;align-items:end;flex-wrap:wrap}
+.row>*{flex:1;min-width:140px}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{padding:8px 6px;border-bottom:1px solid var(--border);text-align:left;vertical-align:top}
+th{color:var(--muted);font-size:12px}
+#alertBanner{display:none;background:var(--green);color:#04140a;font-weight:700;padding:12px 16px;border-radius:12px;margin-bottom:14px}
+#alertBanner.show{display:block}
+#statusBar{font-size:13px;color:var(--muted)}
+.kv{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border);font-size:14px}
+.kv:last-child{border-bottom:0}
+.kv span:first-child{color:var(--muted)}
+.mono{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12px;word-break:break-all}
+footer{padding:20px 16px 40px;color:var(--muted);font-size:12px;max-width:1080px;margin:0 auto}
+
+/* Tabs */
+.tabs{display:flex;gap:8px;max-width:1080px;margin:0 auto;padding:10px 16px 0;flex-wrap:wrap}
+.tabbtn{background:var(--card2);color:var(--muted);border:1px solid var(--border);border-radius:999px;padding:8px 16px;font-weight:700;cursor:pointer;font-size:14px}
+.tabbtn.active{background:var(--green);color:#04140a;border-color:var(--green)}
+.tabcount{font-weight:400;font-size:12px}
+.tabpane{display:none}
+.tabpane.active{display:block}
+/* Help (?) buttons */
+.helpbtn{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:var(--card2);color:var(--muted);border:1px solid var(--border);font-size:12px;font-weight:700;cursor:pointer;padding:0;vertical-align:middle}
+.helpbox{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:10px 12px;font-size:13px;color:var(--text);margin-bottom:10px}
+/* Recommendation rows */
+.rec-row{border:1px solid var(--border);border-radius:12px;padding:10px 12px;margin-bottom:10px;background:var(--card)}
+.rec-line{font-size:14px}
+.rec-detail{margin-top:8px}
+/* Calendar */
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
+.cal-head{font-size:12px;color:var(--muted);text-align:center;padding:4px 0}
+.cal-day{background:var(--card);border:1px solid var(--border);border-radius:10px;min-height:64px;padding:6px;cursor:pointer;font-size:12px}
+.cal-day.empty{background:transparent;border-color:transparent;cursor:default}
+.cal-day.today{border-color:var(--green)}
+.cal-day.sel{box-shadow:0 0 0 2px var(--green)}
+.cal-num{font-weight:700;font-size:13px}
+.cal-pill{display:inline-block;margin-top:4px;padding:2px 7px;border-radius:999px;font-size:11px;font-weight:700}
+.cal-pill.sell{background:var(--amber);color:#241a00}
+.cal-pill.buy{background:var(--green);color:#04140a}
+.cal-pill.rec{background:#7c3aed;color:#fff}
+
+/* ===== v2: signal colours, collapsed cards, gauges, compact rows, price labels ===== */
+.sigcard{border-top:4px solid var(--sig,#00c805)}
+.sigdot{display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--sig,#00c805);margin-right:6px;vertical-align:middle}
+.brief{font-size:13px;color:var(--muted);margin:6px 0 8px}
+.plabel{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-top:8px}
+.gauge{height:8px;background:var(--bg2);border:1px solid var(--border);border-radius:999px;overflow:hidden;margin:8px 0 4px}
+.gauge-fill{height:100%;background:var(--sig,#00c805);width:0%;transition:width .3s}
+.gauge-cap{font-size:12px;color:var(--muted)}
+details.details{margin-top:10px;border-top:1px solid var(--border);padding-top:6px}
+details.details summary{cursor:pointer;font-weight:700;font-size:13px;padding:6px 0;list-style:none}
+details.details summary::-webkit-details-marker{display:none}
+details.details summary::before{content:"▸ ";color:var(--sig,#00c805)}
+details.details[open ] summary::before{content:"▾ "}
+.matching{margin-top:10px}
+.matching .match-title{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px}
+.match-row{border:1px solid var(--border);border-left:3px solid var(--sig,#00c805);border-radius:10px;padding:8px 10px;margin-bottom:6px;cursor:pointer;background:var(--card2)}
+.match-line{display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-size:13px}
+.match-line b{font-size:14px}
+.match-detail{margin-top:6px;font-size:12px;color:var(--muted)}
+.pill.sigpill{color:#04140a}
+.scan-summary{font-size:14px;padding:8px 0}
+.logbtn{margin-top:8px}
